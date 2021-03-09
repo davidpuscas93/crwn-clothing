@@ -24,11 +24,31 @@
   }
 
   .quantity {
-    padding-left: 20px;
+    display: flex;
+
+    .arrow {
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.10);
+        color: red;
+        transition: 0.3s cubic-bezier(0.47, 0, 0.745, 0.715);
+      }
+    }
+
+    .value {
+      margin: 0 10px;
+    }
   }
 
   .remove-button {
     padding-left: 12px;
     cursor: pointer;
+
+    &:hover {
+      transform: scale(1.20);
+      color: red;
+      transition: 0.3s cubic-bezier(0.47, 0, 0.745, 0.715);
+    }
   }
 }
