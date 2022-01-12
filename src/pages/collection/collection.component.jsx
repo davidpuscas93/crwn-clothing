@@ -13,7 +13,7 @@ import {
 
 const Collection = ({ collection }) => {
   const { title, items } = collection;
-  console.log(collection);
+
   return (
     <CollectionContainer>
       <CollectionTitle> {title}</CollectionTitle>
