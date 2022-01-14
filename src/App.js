@@ -37,28 +37,31 @@ class App extends React.Component {
   componentDidMount() {
     const { setCurrentUser /* collectionsPreview */ } = this.props;
 
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(
+      async (userAuth) => {
+        if (userAuth) {
+          const userRef = await createUserProfileDocument(userAuth);
 
-        userRef.onSnapshot((snapshot) => {
-          setCurrentUser({
-            id: snapshot.id,
-            ...snapshot.data(),
+          userRef.onSnapshot((snapshot) => {
+            setCurrentUser({
+              id: snapshot.id,
+              ...snapshot.data(),
+            });
           });
-        });
-      } else {
-        setCurrentUser(null);
-      }
+        } else {
+          setCurrentUser(null);
+        }
 
-      /**
-       * Adds data to firebase (should be used only manually)
-       */
-      // addCollectionAndDocuments(
-      //   "collections",
-      //   collectionsPreview.map(({ title, items }) => ({ title, items }))
-      // );
-    });
+        /**
+         * Adds data to firebase (should be used only manually)
+         */
+        // addCollectionAndDocuments(
+        //   "collections",
+        //   collectionsPreview.map(({ title, items }) => ({ title, items }))
+        // );
+      },
+      (error) => console.error(error)
+    );
   }
 
   componentWillUnmount() {
