@@ -21,10 +21,10 @@ import "./App.css";
 /**
  * Pages
  */
+import Shop from "./pages/shop/shop.container";
+import Checkout from "./pages/checkout/checkout.container";
 import Home from "./pages/home/home.component";
-import Shop from "./pages/shop/shop.component";
 import SignInAndSignUp from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
-import Checkout from "./pages/checkout/checkout.component";
 
 /**
  * Components

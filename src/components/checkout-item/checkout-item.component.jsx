@@ -1,11 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
-
-import {
-  addItem,
-  decrementItem,
-  removeItem,
-} from "../../redux/cart/cart.actions";
 
 import {
   CheckoutItemContainer,
@@ -15,7 +8,7 @@ import {
   RemoveButtonContainer,
 } from "./checkout-item.styles";
 
-const CheckoutItem = ({ cartItem, addItem, decrementItem, removeItem }) => {
+const CheckoutItemComponent = ({ cartItem, addItem, decrementItem, removeItem }) => {
   const { name, imageUrl, price, quantity } = cartItem;
 
   return (
@@ -41,10 +34,4 @@ const CheckoutItem = ({ cartItem, addItem, decrementItem, removeItem }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  addItem: (item) => dispatch(addItem(item)),
-  decrementItem: (item) => dispatch(decrementItem(item)),
-  removeItem: (item) => dispatch(removeItem(item)),
-});
-
-export default connect(null, mapDispatchToProps)(CheckoutItem);
+export default CheckoutItemComponent;
