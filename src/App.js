@@ -19,7 +19,7 @@ import SignInAndSignUp from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.com
 /**
  * Components
  */
-import Header from "./components/header/header.component";
+import Header from "./components/header/header.container";
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
