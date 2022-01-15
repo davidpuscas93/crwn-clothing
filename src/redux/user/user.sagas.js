@@ -10,7 +10,7 @@ import UserActionTypes from "./user.types";
 
 import { signInSuccess, signInFailure } from "./user.actions";
 
-function* getSnapshotFromUserAuth(userAuth) {
+export function* getSnapshotFromUserAuth(userAuth) {
   try {
     const userRef = yield call(createUserProfileDocument, userAuth);
     const userSnapshot = yield userRef.get();
@@ -20,19 +20,21 @@ function* getSnapshotFromUserAuth(userAuth) {
   }
 }
 
-function* signInWithGoogle() {
+export function* signInWithGoogle() {
   try {
+    yield console.log(googleProvider);
     const { user } = yield auth.signInWithPopup(googleProvider);
-    yield call(getSnapshotFromUserAuth(user));
+    yield call(getSnapshotFromUserAuth, user);
   } catch (error) {
+    yield console.log(error);
     yield put(signInFailure(error));
   }
 }
 
-function* signInWithEmail({ payload: { email, password } }) {
+export function* signInWithEmail({ payload: { email, password } }) {
   try {
     const { user } = yield auth.signInWithEmailAndPassword(email, password);
-    yield call(getSnapshotFromUserAuth(user));
+    yield call(getSnapshotFromUserAuth, user);
   } catch (error) {
     yield put(signInFailure(error));
   }
