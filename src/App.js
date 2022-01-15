@@ -3,18 +3,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
-import { setCurrentUser } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selectors";
-// import { selectCollectionsForPreview } from "./redux/shop/shop.selectors";
-
-import {
-  auth,
-  createUserProfileDocument,
-  /**
-   * Use function below to add data to firebase - should be used only manually
-   */
-  // addCollectionAndDocuments,
-} from "./firebase/firebase.utils";
 
 import "./App.css";
 
@@ -35,33 +24,31 @@ class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser /* collectionsPreview */ } = this.props;
+    // this.unsubscribeFromAuth = auth.onAuthStateChanged(
+    //   async (userAuth) => {
+    //     if (userAuth) {
+    //       const userRef = await createUserProfileDocument(userAuth);
 
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(
-      async (userAuth) => {
-        if (userAuth) {
-          const userRef = await createUserProfileDocument(userAuth);
+    //       userRef.onSnapshot((snapshot) => {
+    //         setCurrentUser({
+    //           id: snapshot.id,
+    //           ...snapshot.data(),
+    //         });
+    //       });
+    //     } else {
+    //       setCurrentUser(null);
+    //     }
 
-          userRef.onSnapshot((snapshot) => {
-            setCurrentUser({
-              id: snapshot.id,
-              ...snapshot.data(),
-            });
-          });
-        } else {
-          setCurrentUser(null);
-        }
-
-        /**
-         * Adds data to firebase (should be used only manually)
-         */
-        // addCollectionAndDocuments(
-        //   "collections",
-        //   collectionsPreview.map(({ title, items }) => ({ title, items }))
-        // );
-      },
-      (error) => console.error(error)
-    );
+    //     /**
+    //      * Adds data to firebase (should be used only manually)
+    //      */
+    //     // addCollectionAndDocuments(
+    //     //   "collections",
+    //     //   collectionsPreview.map(({ title, items }) => ({ title, items }))
+    //     // );
+    //   },
+    //   (error) => console.error(error)
+    // );
   }
 
   componentWillUnmount() {
@@ -91,11 +78,6 @@ class App extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
-  // collectionsPreview: selectCollectionsForPreview,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);
