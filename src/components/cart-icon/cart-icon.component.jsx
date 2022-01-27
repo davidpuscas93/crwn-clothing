@@ -1,4 +1,9 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import { toggleCartHidden } from "../../redux/cart/cart.actions";
+
+import { selectCartItemsCount } from "../../redux/cart/cart.selectors";
 
 import {
   CartIconContainer,
@@ -6,11 +11,16 @@ import {
   ItemCountContainer,
 } from "./cart-icon.styles";
 
-const CartIconComponent = ({ toggleCartHidden, itemCount }) => (
-  <CartIconContainer onClick={toggleCartHidden}>
-    <ShoppingIconContainer />
-    <ItemCountContainer>{itemCount}</ItemCountContainer>
-  </CartIconContainer>
-);
+const CartIconComponent = () => {
+  const dispatch = useDispatch();
+  const itemCount = useSelector(selectCartItemsCount);
+
+  return (
+    <CartIconContainer onClick={() => dispatch(toggleCartHidden())}>
+      <ShoppingIconContainer />
+      <ItemCountContainer>{itemCount}</ItemCountContainer>
+    </CartIconContainer>
+  );
+};
 
 export default CartIconComponent;
