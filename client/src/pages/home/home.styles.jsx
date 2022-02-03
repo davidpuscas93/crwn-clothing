@@ -6,7 +6,7 @@ export const HomeContainer = styled.div`
   align-items: center;
   padding: 20px 80px;
 
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 900px) {
     padding: 10px;
   }
 `;

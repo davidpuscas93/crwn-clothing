@@ -4,7 +4,7 @@ export const CollectionContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 900px) {
     align-items: center;
   }
 `;
@@ -23,7 +23,7 @@ export const CollectionItemsContainer = styled.div`
     margin-bottom: 30px;
   }
 
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 900px) {
     grid-template-columns: 1fr 1fr;
   }
 `;

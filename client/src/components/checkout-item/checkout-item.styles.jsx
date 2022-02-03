@@ -10,7 +10,7 @@ export const CheckoutItemContainer = styled.div`
   font-size: 20px;
   box-shadow: 2px whitesmoke;
 
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 900px) {
     font-size: 16px;
   }
 `;
@@ -25,7 +25,7 @@ export const ImageContainer = styled.div`
     box-shadow: 2px 2px whitesmoke;
   }
 
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 900px) {
     width: 22%;
   }
 `;
@@ -33,7 +33,7 @@ export const ImageContainer = styled.div`
 export const TextContainer = styled.span`
   width: 23%;
 
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 900px) {
     width: 22%;
   }
 `;
@@ -55,7 +55,7 @@ export const QuantityContainer = styled(TextContainer)`
     }
   }
 
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 900px) {
     span {
       margin: 0 4px;
     }
