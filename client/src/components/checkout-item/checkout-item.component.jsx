@@ -38,4 +38,4 @@ const CheckoutItemComponent = ({ cartItem }) => {
   );
 };
 
-export default CheckoutItemComponent;
+export default React.memo(CheckoutItemComponent);
