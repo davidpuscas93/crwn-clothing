@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, lazy, Suspense } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -8,17 +8,20 @@ import { checkUserSession } from "./redux/user/user.actions";
 import { GlobalStyle } from "./global.styles";
 
 /**
- * Pages
- */
-import Shop from "./pages/shop/shop.container";
-import Checkout from "./pages/checkout/checkout.container";
-import Home from "./pages/home/home.component";
-import SignInAndSignUp from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
-
-/**
  * Components
  */
 import Header from "./components/header/header.container";
+import Spinner from "./components/spinner/spinner.component";
+
+/**
+ * Pages
+ */
+const Home = lazy(() => import("./pages/home/home.component"));
+const Shop = lazy(() => import("./pages/shop/shop.container"));
+const Checkout = lazy(() => import("./pages/checkout/checkout.container"));
+const SignInAndSignUp = lazy(() =>
+  import("./pages/sign-in-and-sign-up/sign-in-and-sign-up.component")
+);
 
 const App = () => {
   const dispatch = useDispatch();
@@ -33,16 +36,18 @@ const App = () => {
       <GlobalStyle />
       <Header />
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/shop" component={Shop} />
-        <Route exact path="/checkout" component={Checkout} />
-        <Route
-          exact
-          path="/signin"
-          render={() =>
-            currentUser ? <Redirect to="/" /> : <SignInAndSignUp />
-          }
-        />
+        <Suspense fallback={<Spinner />}>
+          <Route exact path="/" component={Home} />
+          <Route path="/shop" component={Shop} />
+          <Route exact path="/checkout" component={Checkout} />
+          <Route
+            exact
+            path="/signin"
+            render={() =>
+              currentUser ? <Redirect to="/" /> : <SignInAndSignUp />
+            }
+          />
+        </Suspense>
       </Switch>
     </div>
   );
