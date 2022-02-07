@@ -12,6 +12,12 @@ const config = {
   measurementId: "G-JZH965QQD3",
 };
 
+if (!firebase.apps.length) {
+  firebase.initializeApp(config);
+} else {
+  firebase.app(); // if already initialized, use this one
+}
+
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
 
@@ -37,11 +43,18 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(config);
-} else {
-  firebase.app(); // if already initialized, use this one
-}
+export const getUserCartRef = async (userId) => {
+  const cartRef = firestore.collection("carts").where("userId", "==", userId);
+  const cartSnapshot = await cartRef.get();
+
+  if (cartSnapshot.empty) {
+    const cartDocRef = firestore.collection("carts").doc();
+    await cartDocRef.set({ userId, cartItems: [] });
+    return cartDocRef;
+  } else {
+    return cartSnapshot.docs[0].ref;
+  }
+};
 
 export const addCollectionAndDocuments = async (
   collectionKey,
